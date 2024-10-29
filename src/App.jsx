@@ -3,6 +3,8 @@ import LoginPage from './pages/loginPage/LoginPage';
 import RegisterPage from './pages/registerPage/RegisterPage';
 import './index.css';  // Import Tailwind here
 import SideBar from "./common/sideBar/SideBar.jsx";
+import DashboardPage from "./pages/dashboardPage/DashboardPage.jsx";
+import ExpensesPage from "./pages/expensesPage/ExpensesPage.jsx";
 
 
 function App() {
@@ -15,7 +17,14 @@ function App() {
     //     <Route path="/register" element={<RegisterPage />} />
     //   </Routes>
     // </Router>
-    <SideBar />
+    <Router>
+      <SideBar />
+      <Routes>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/expenses" element={<ExpensesPage />} />
+        {/* Add additional routes as needed */}
+      </Routes>
+    </Router>
   )
 }
 
