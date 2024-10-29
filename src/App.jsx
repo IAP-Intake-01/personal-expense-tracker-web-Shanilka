@@ -27,7 +27,7 @@ function App() {
             <SideBar />
             <Routes>
               <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/expenses" element={<ExpensesPage />} />
+              <Route path="/expenses" />
               {/* Add additional routes as needed */}
             </Routes>
           </Router>
