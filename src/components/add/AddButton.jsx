@@ -35,7 +35,7 @@ function AddButton() {
                                 <span className="text-gray-700">Expense Name</span>
                                 <input
                                     type="text"
-                                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200"
+                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     placeholder="Enter expense name"
                                     required
                                 />
@@ -44,7 +44,7 @@ function AddButton() {
                                 <span className="text-gray-700">Category</span>
                                 <input
                                     type="text"
-                                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200"
+                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     placeholder="Enter category"
                                     required
                                 />
@@ -53,7 +53,7 @@ function AddButton() {
                                 <span className="text-gray-700">Amount</span>
                                 <input
                                     type="number"
-                                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200"
+                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     placeholder="Enter amount"
                                     required
                                 />
@@ -62,7 +62,7 @@ function AddButton() {
                                 <span className="text-gray-700">Date</span>
                                 <input
                                     type="date"
-                                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-emerald-500 focus:ring focus:ring-emerald-200"
+                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     required
                                 />
                             </label>
