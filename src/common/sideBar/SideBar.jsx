@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Home,
-    BarChart2,
+    Coins,
     LogOut,
     Menu,
     X
@@ -15,7 +15,7 @@ function SideBar() {
 
     const menuItems = [
         { title: 'Dashboard', icon: <Home size={20} />, path: '/dashboard' },
-        { title: 'Expenses', icon: <BarChart2 size={20} />, path: '/expenses' },
+        { title: 'Expenses', icon: <Coins size={20} />, path: '/expenses' },
     ];
 
     return (
