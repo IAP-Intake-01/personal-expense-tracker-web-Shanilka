@@ -10,10 +10,52 @@ function ExpensesTable() {
         { id: 4, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
         { id: 5, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
         { id: 6, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 7, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 8, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 9, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 10, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 11, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 12, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 13, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 14, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 15, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 16, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 17, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 18, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 19, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 20, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 21, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 22, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 23, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 24, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 25, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 26, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 27, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 28, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 29, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 30, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 31, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 32, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 33, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 34, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 35, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 36, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 37, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 38, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 39, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 40, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 41, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 42, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
+        { id: 43, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
+        { id: 44, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
+        { id: 45, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
+        { id: 46, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
+        { id: 47, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
+        { id: 48, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
     ];
 
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(3);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (newPage) => {
         setPage(newPage);
@@ -34,7 +76,6 @@ function ExpensesTable() {
                             <th className="px-6 py-3 text-gray-700 font-semibold">Category</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Price</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Date</th>
-                            <th className="px-6 py-3 text-gray-700 font-semibold">Status</th>
                             <th className="px-6 py-3 text-center text-gray-700 font-semibold">Actions</th>
                         </tr>
                     </thead>
@@ -45,16 +86,8 @@ function ExpensesTable() {
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        className={`px-2 py-1 text-xs rounded-full ${item.status === "Available" ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"
-                                            }`}
-                                    >
-                                        {item.status}
-                                    </span>
-                                </td>
                                 <td className="px-6 py-4 text-center whitespace-nowrap">
-                                    <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2 hover:bg-blue-600 transition-colors">
+                                    <button className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700 transition-colors">
                                         Update
                                     </button>
                                     <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors">
@@ -70,18 +103,18 @@ function ExpensesTable() {
             {/* Pagination */}
             <div className="flex items-center justify-between mt-4">
                 <div className="flex items-center space-x-2">
-                    <span>Rows per page:</span>
-                    <select
+                    <span>Rows per page: 10</span>
+                    {/* <select
                         value={rowsPerPage}
                         onChange={handleChangeRowsPerPage}
                         className="border rounded-md p-1"
                     >
-                        {[3, 5, 10].map((option) => (
+                        {[5, 10].map((option) => (
                             <option key={option} value={option}>
                                 {option}
                             </option>
                         ))}
-                    </select>
+                    </select> */}
                 </div>
                 <div className="flex items-center space-x-2">
                     <button
