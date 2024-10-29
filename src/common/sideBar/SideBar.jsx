@@ -13,7 +13,7 @@ function SideBar() {
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="h-full">
             {/* Mobile Menu Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -76,7 +76,7 @@ function SideBar() {
             </div>
 
             {/* Main Content Area */}
-            <div className="lg:ml-64 p-8 absolute top-0 left-0 w-10/12 h-full">
+            <div className="lg:ml-64 p-8 absolute top-0 left-0 w-10/12">
                 <div className="max-w-4xl mx-auto w-full">
                     <Routes>
                         <Route path='*' element={<DashboardPage />} />
