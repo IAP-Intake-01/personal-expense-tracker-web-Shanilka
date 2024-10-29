@@ -67,9 +67,9 @@ function ExpensesTable() {
     };
 
     return (
-        <div className="p-4 bg-gray-100">
-            <div className="overflow-auto bg-white shadow-md rounded-lg max-h-[400px]">
-                <table className="min-w-full text-sm text-left text-gray-500">
+        <div className="p-4  top-44 w-11/12 left-8 h-96 absolute">
+            <div className="overflow-auto bg-white shadow-md rounded-lg h-80 left-1">
+                <table className="min-w-full text-sm text-left text-gray-500 ">
                     <thead className="bg-gray-200 sticky top-0">
                         <tr>
                             <th className="px-6 py-3 text-gray-700 font-semibold">ID</th>
