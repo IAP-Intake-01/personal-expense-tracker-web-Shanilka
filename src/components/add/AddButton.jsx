@@ -1,8 +1,11 @@
 import React from 'react'
+import '../add/Button.css'
 
 function AddButton() {
     return (
-        <button class="px-4 py-2  bg-gray-100 text-emerald-600 rounded-full hover:bg-emerald-100 hover:text-emerald-600 hover:border-none transition duration-500 ease-in-out ">
+        <button class="px-4 py-2  bg-gray-100 text-emerald-600 rounded-full 
+                    hover:bg-emerald-100 hover:text-emerald-600 hover:border-none 
+                    transition duration-500 ease-in-out add-expenses-btn-custom-possition">
             + Add New Expenses
         </button>
 
