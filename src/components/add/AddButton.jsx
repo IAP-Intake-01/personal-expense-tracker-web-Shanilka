@@ -28,11 +28,34 @@ function AddButton() {
             alert('Save failed: ' + (error.response?.data?.error || 'Unknown error'));
         }
         toggleModal();
+        window.location.reload();
     };
 
     const toggleModal = () => {
         setIsVisible(!isVisible);
     };
+
+    // ************************************* Load All Data
+    const [expenses, setExpenses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    function getall() {
+        useEffect(() => {
+            const fetchExpenses = async () => {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/getAllexpenses');
+                    setExpenses(response.data);
+                } catch (err) {
+                    console.error('Error fetching expenses:', err);
+                    setError('Error fetching expenses');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchExpenses();
+        }, []);
+    }
 
     return (
         <div>

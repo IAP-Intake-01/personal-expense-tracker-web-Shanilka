@@ -10,31 +10,31 @@ function ExpensesTable() {
     const [expenses, setExpenses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        const fetchExpenses = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/expenses');
-                setExpenses(response.data);
-            } catch (err) {
-                console.error('Error fetching expenses:', err);
-                setError('Error fetching expenses');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchExpenses();
-    }, []);
+
+    function getall() {
+        useEffect(() => {
+            const fetchExpenses = async () => {
+                try {
+                    const response = await axios.get('http://localhost:3000/api/getAllexpenses');
+                    setExpenses(response.data);
+                } catch (err) {
+                    console.error('Error fetching expenses:', err);
+                    setError('Error fetching expenses');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchExpenses();
+        }, []);
+    }
+
+    getall();
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
     const handleChangePage = (newPage) => {
         setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
     };
 
     return (
@@ -112,3 +112,7 @@ function ExpensesTable() {
 };
 
 export default ExpensesTable;
+
+// const date = new Date();
+// const formattedDate = date.toLocaleDateString();
+// console.log(formattedDate);
