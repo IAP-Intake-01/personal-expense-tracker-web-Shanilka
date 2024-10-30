@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import instance from '../../service/AxiosOrder';
 
 function LoginPage() {
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        instance.post('/login', {
+            email: email,
+            password: password,
+        })
+            .then(function (response) {
+                console.log(response.data.token);
+                localStorage.setItem('token', response.data.token)
+                window.location.reload()
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    };
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
@@ -27,7 +46,7 @@ function LoginPage() {
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">Login</h2>
                     <p className="text-sm text-gray-600 mb-4">Access your account</p>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email address</label>
                             <input
@@ -35,6 +54,7 @@ function LoginPage() {
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="you@example.com"
                                 required
+                                onChange={(val) => setEmail(val.target.value)}
                             />
                         </div>
                         <div>
@@ -44,6 +64,7 @@ function LoginPage() {
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Your password"
                                 required
+                                onChange={(val) => setPassword(val.target.value)}
                             />
                         </div>
                         <button
