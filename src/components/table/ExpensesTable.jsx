@@ -1,58 +1,29 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 function ExpensesTable() {
 
-    const items = [
-        { id: 1, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 2, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 3, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 4, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 5, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 6, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 7, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 8, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 9, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 10, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 11, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 12, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 13, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 14, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 15, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 16, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 17, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 18, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 19, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 20, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 21, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 22, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 23, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 24, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 25, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 26, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 27, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 28, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 29, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 30, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 31, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 32, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 33, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 34, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 35, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 36, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 37, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 38, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 39, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 40, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 41, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 42, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-        { id: 43, category: "Electronics", price: "$299.99", date: "2024-10-28", status: "Available" },
-        { id: 44, category: "Furniture", price: "$199.99", date: "2024-10-25", status: "Sold" },
-        { id: 45, category: "Clothing", price: "$49.99", date: "2024-10-22", status: "Available" },
-        { id: 46, category: "Toys", price: "$29.99", date: "2024-10-18", status: "Available" },
-        { id: 47, category: "Appliances", price: "$499.99", date: "2024-10-10", status: "Sold" },
-        { id: 48, category: "Books", price: "$19.99", date: "2024-10-05", status: "Available" },
-    ];
+    const items = [];
+
+    // ************************************* Load All Data
+    const [expenses, setExpenses] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchExpenses = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/expenses');
+                setExpenses(response.data);
+            } catch (err) {
+                console.error('Error fetching expenses:', err);
+                setError('Error fetching expenses');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchExpenses();
+    }, []);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -80,7 +51,7 @@ function ExpensesTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
+                        {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
                             <tr key={item.id} className="hover:bg-gray-50">
                                 <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>

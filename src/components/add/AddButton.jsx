@@ -11,9 +11,9 @@ function AddButton() {
         date: ''
     });
 
+    // ************************************ Save Data
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         try {
             const response = await axios.post('http://localhost:3000/api/saveData', {
                 category: formData.category,
@@ -27,7 +27,6 @@ function AddButton() {
             console.error('Error during registration:', error);
             alert('Save failed: ' + (error.response?.data?.error || 'Unknown error'));
         }
-
         toggleModal();
     };
 
@@ -51,16 +50,7 @@ function AddButton() {
                     <div className="bg-white p-6 rounded-md shadow-md w-full max-w-md">
                         <h2 className="text-lg font-semibold mb-4">New Expense</h2>
                         <form onSubmit={handleSubmit}>
-                            <label className="block mb-4">
-                                <span className="text-gray-700">Expense Name</span>
-                                <input
-                                    type="text"
-                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Enter expense name"
-                                    required
 
-                                />
-                            </label>
                             <label className="block mb-4">
                                 <span className="text-gray-700">Category</span>
                                 <select
