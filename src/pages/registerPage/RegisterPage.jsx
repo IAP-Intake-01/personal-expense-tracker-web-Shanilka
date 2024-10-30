@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 function RegisterPage() {
@@ -8,32 +9,15 @@ function RegisterPage() {
         conformePassword: ''
     });
 
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setUserData({ ...userdata, [id]: value });
-    };
+    function handleSubmit(e) {
+        e.preventDefault()
 
-    const handleSubmit = async (e) => {
-        e.prevendDefult();
-
-        if (userdata.password !== userdata.conformePassword) {
-            setError('Passwords do not match');
-            return;
-        }
-
-        try {
-            const response = await axios.post('https:', {
-                email: userdata.email,
-                password: userdata.password,
-                conformpassword: userdata.conformePassword
-            });
-            // alert('Form Submitted')
-            console.log(response.data)
-        } catch (error) {
-            alert('Error SingUp')
-            setError('Faild to sing up. Please try Again')
-        }
-    };
+        axios.post('/reg_user', userdata)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => console.log(err))
+    }
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
@@ -67,14 +51,14 @@ function RegisterPage() {
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="you@example.com"
                                 required
-                                onChange={handleInputChange}
+                                onChange={(val) => setUserData({ ...userdata, email: val.target.value })}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Password</label>
                             <input
                                 // value={userdata.password}
-                                onChange={handleInputChange}
+                                onChange={(val) => setUserData({ ...userdata, password: val.target.value })}
                                 type="password"
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Enter 8 characters or more"
@@ -85,7 +69,7 @@ function RegisterPage() {
                             <label className="block text-sm font-medium text-gray-700">Repeat password</label>
                             <input
                                 // value={userdata.conformePassword}
-                                onChange={handleInputChange}
+                                onChange={(val) => setUserData({ ...userdata, conformePassword: val.target.value })}
                                 type="password"
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Confirm your password"
