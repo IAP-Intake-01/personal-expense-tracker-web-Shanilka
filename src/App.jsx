@@ -5,12 +5,21 @@ import './index.css';  // Import Tailwind here
 import SideBar from "./common/sideBar/SideBar.jsx";
 import DashboardPage from "./pages/dashboardPage/DashboardPage.jsx";
 import ExpensesPage from "./pages/expensesPage/ExpensesPage.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function App() {
 
   const [login, setLogin] = useState(false)
+  console.log(setLogin);
+
+  useEffect(() => {
+    console.log(localStorage.getItem);
+
+    if (localStorage.getItem('token')) {
+      setLogin(true)
+    }
+  }, [])
 
   return (
     // <Router>

@@ -9,7 +9,7 @@ function LoginPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        instance.post('/login', {
+        instance.post('/api/login', {
             email: email,
             password: password,
         })
