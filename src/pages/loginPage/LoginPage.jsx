@@ -1,6 +1,9 @@
 import React from 'react'
 
 function LoginPage() {
+
+
+
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
             {/* Left Side - Marketing Section */}
