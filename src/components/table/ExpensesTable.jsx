@@ -27,8 +27,18 @@ function ExpensesTable() {
             fetchExpenses();
         }, []);
     }
-
     getall();
+
+    // ************************************** delete Data
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/deleteExpenses/${id}`);
+            // Optionally, refresh the expenses list or remove the item from state
+            setExpenses((prevExpenses) => prevExpenses.filter((expense) => expense.id !== id));
+        } catch (error) {
+            console.error('Error deleting expense:', error);
+        }
+    };
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -61,7 +71,9 @@ function ExpensesTable() {
                                     <button className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700 transition-colors">
                                         Update
                                     </button>
-                                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors">
+                                    <button
+                                        onClick={() => handleDelete(item.id)}
+                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition-colors">
                                         Delete
                                     </button>
                                 </td>
