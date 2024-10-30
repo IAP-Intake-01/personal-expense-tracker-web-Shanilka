@@ -1,23 +1,29 @@
+import React, { useState } from 'react';
 import axios from 'axios';
-import React, { useState } from 'react'
 
-function RegisterPage() {
-
+const RegisterPage = () => {
     const [userdata, setUserData] = useState({
+        name: '',
         email: '',
         password: '',
-        conformePassword: ''
+        conformPassword: '',
     });
 
-    function handleSubmit(e) {
-        e.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        axios.post('/reg_user', userdata)
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((err) => console.log(err))
-    }
+        try {
+            const response = await axios.post('http://localhost:3000/register', {
+                name: userdata.name,
+                email: userdata.email,
+                password: userdata.password,
+            });
+            alert("Registration successful: " + response.data.message);
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('Registration failed: ' + (error.response?.data?.error || 'Unknown error'));
+        }
+    };
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
@@ -38,12 +44,23 @@ function RegisterPage() {
                 <div className="w-full max-w-md">
                     <div className="flex justify-between items-center mb-8">
                         <a href="/login" className="px-4 py-2 text-sm font-semibold text-teal-800 border border-teal-800 rounded-lg hover:bg-teal-800 hover:text-white transition duration-300">Sign In</a>
-
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-6">Registration</h2>
-                    <p className="text-sm text-gray-600 mb-4">Create your free account</p>
 
                     <form className="space-y-4" onSubmit={handleSubmit}>
+                        {/* Username Field */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Username</label>
+                            <input
+                                type="text"
+                                className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
+                                placeholder="Enter your username"
+                                required
+                                onChange={(val) => setUserData({ ...userdata, name: val.target.value })}
+                            />
+                        </div>
+
+                        {/* Email Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email address</label>
                             <input
@@ -54,38 +71,31 @@ function RegisterPage() {
                                 onChange={(val) => setUserData({ ...userdata, email: val.target.value })}
                             />
                         </div>
+
+                        {/* Password Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Password</label>
                             <input
-                                // value={userdata.password}
-                                onChange={(val) => setUserData({ ...userdata, password: val.target.value })}
                                 type="password"
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Enter 8 characters or more"
                                 required
+                                onChange={(val) => setUserData({ ...userdata, password: val.target.value })}
                             />
                         </div>
+
+                        {/* Confirm Password Field */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Repeat password</label>
                             <input
-                                // value={userdata.conformePassword}
-                                onChange={(val) => setUserData({ ...userdata, conformePassword: val.target.value })}
                                 type="password"
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Confirm your password"
                                 required
+                                onChange={(val) => setUserData({ ...userdata, conformPassword: val.target.value })}
                             />
                         </div>
-                        <div className="flex items-center">
-                            <input
-                                type="checkbox"
-                                className="h-4 w-4 text-teal-600 border-gray-300 rounded focus:ring-teal-200"
-                                required
-                            />
-                            <label className="ml-2 text-sm text-gray-600">
-                                I accept the <a href="#" className="text-teal-600 hover:underline">Terms and Conditions</a>
-                            </label>
-                        </div>
+
                         <button
                             type="submit"
                             className="w-full py-3 mt-6 font-semibold text-white bg-teal-600 rounded-md hover:bg-teal-700 transition duration-300"
@@ -96,7 +106,7 @@ function RegisterPage() {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default RegisterPage
+export default RegisterPage;
