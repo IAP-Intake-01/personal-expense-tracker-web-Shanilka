@@ -42,12 +42,20 @@ function AddButton() {
                             </label>
                             <label className="block mb-4">
                                 <span className="text-gray-700">Category</span>
-                                <input
-                                    type="text"
+                                <select
                                     className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
-                                    placeholder="Enter category"
                                     required
-                                />
+                                >
+                                    <option value="" disabled selected>
+                                        Select category
+                                    </option>
+                                    <option value="category1">Category 1</option>
+                                    <option value="category2">Category 2</option>
+                                    <option value="category3">Category 3</option>
+                                    <option value="category3">Category 4</option>
+                                    <option value="category3">Category 5</option>
+                                    {/* Add more options as needed */}
+                                </select>
                             </label>
                             <label className="block mb-4">
                                 <span className="text-gray-700">Amount</span>

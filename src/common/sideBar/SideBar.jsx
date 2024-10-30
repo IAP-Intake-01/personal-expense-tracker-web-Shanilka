@@ -12,6 +12,11 @@ function SideBar() {
         { title: 'Expenses', icon: <Coins size={20} />, path: '/expenses' },
     ];
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        window.location.reload(); // Optional: refresh page or redirect
+    };
+
     return (
         <div className="h-full">
             {/* Mobile Menu Button */}
@@ -68,7 +73,7 @@ function SideBar() {
                         <span className="text-gray-500 group-hover:text-teal-600">
                             <LogOut size={20} />
                         </span>
-                        <span className="ml-3 font-medium group-hover:text-teal-600">
+                        <span onClick={handleLogout} className="ml-3 font-medium group-hover:text-teal-600">
                             Logout
                         </span>
                     </Link>
