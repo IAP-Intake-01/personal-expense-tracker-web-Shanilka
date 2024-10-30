@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import '../add/Button.css';
+import axios from 'axios';
 
 function AddButton() {
     const [isVisible, setIsVisible] = useState(false);
 
-    const toggleModal = () => {
-        setIsVisible(!isVisible);
+    const [formData, setFormData] = useState({
+        category: '',
+        price: '',
+        date: ''
+    });
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/saveData', {
+                category: formData.category,
+                price: formData.price,
+                date: formData.date,
+            });
+            alert("Data Save successful: " + response.data.message);
+            console.log(formData)
+            // navigate('/login')
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('Save failed: ' + (error.response?.data?.error || 'Unknown error'));
+        }
+
+        toggleModal();
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission logic here
-        console.log("Form submitted");
-        toggleModal(); // Close the modal after submitting
+    const toggleModal = () => {
+        setIsVisible(!isVisible);
     };
 
     return (
@@ -38,6 +58,7 @@ function AddButton() {
                                     className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     placeholder="Enter expense name"
                                     required
+
                                 />
                             </label>
                             <label className="block mb-4">
@@ -45,15 +66,16 @@ function AddButton() {
                                 <select
                                     className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     required
+                                    onChange={(val) => setFormData({ ...formData, category: val.target.value })}
                                 >
                                     <option value="" disabled selected>
                                         Select category
                                     </option>
-                                    <option value="category1">Category 1</option>
-                                    <option value="category2">Category 2</option>
-                                    <option value="category3">Category 3</option>
-                                    <option value="category3">Category 4</option>
-                                    <option value="category3">Category 5</option>
+                                    <option value="Foods">Foods</option>
+                                    <option value="education">Education</option>
+                                    <option value="transport">Transport</option>
+                                    <option value="shoping">Shoping</option>
+                                    <option value="other">Other</option>
                                     {/* Add more options as needed */}
                                 </select>
                             </label>
@@ -64,6 +86,7 @@ function AddButton() {
                                     className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     placeholder="Enter amount"
                                     required
+                                    onChange={(val) => setFormData({ ...formData, price: val.target.value })}
                                 />
                             </label>
                             <label className="block mb-4">
@@ -72,6 +95,7 @@ function AddButton() {
                                     type="date"
                                     className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
                                     required
+                                    onChange={(val) => setFormData({ ...formData, date: val.target.value })}
                                 />
                             </label>
                             <div className="flex justify-end">
