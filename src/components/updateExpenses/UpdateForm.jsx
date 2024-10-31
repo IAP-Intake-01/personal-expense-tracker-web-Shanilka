@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function UpdateForm({ isOpen, closeModal, expenses }) { // Add updateExpensesList prop
+function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateExpensesList prop
 
     const [id, setId] = useState(expenses.id);
     const [category, setCategory] = useState("");
     const [price, setPrice] = useState("");
     const [date, setDate] = useState("");
+
+    // function getall() {
+    //     useEffect(() => {
+    //         const fetchExpenses = async () => {
+    //             try {
+    //                 const response = await axios.get('http://localhost:3000/api/getAllexpenses');
+    //                 setExpenses(response.data);
+    //             } catch (err) {
+    //                 console.error('Error fetching expenses:', err);
+    //                 setError('Error fetching expenses');
+    //             }
+    //         };
+    //         fetchExpenses();
+    //     }, []);
+    // }
 
     const handleUpdate = async (event) => {
         event.preventDefault(); // Prevent page refresh
@@ -25,6 +40,7 @@ function UpdateForm({ isOpen, closeModal, expenses }) { // Add updateExpensesLis
         } catch (error) {
             console.error('Error updating expense:', error.response?.data?.error || error.message);
         }
+        // getall();
     };
 
     return (

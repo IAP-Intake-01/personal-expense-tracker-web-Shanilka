@@ -9,8 +9,10 @@ function ExpensesTable() {
 
     // ************************************* Load All Data
     const [expenses, setExpenses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
     function getall() {
         useEffect(() => {
@@ -39,24 +41,15 @@ function ExpensesTable() {
         }
     };
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
-
     const handleChangePage = (newPage) => {
         setPage(newPage);
     };
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ id: "", category: "", price: "", date: "" });
 
     // Function to open modal and set form data
     const openModal = (item) => {
         setFormData(item); // Populate form with existing data
         setIsModalOpen(true);
     };
-
-    // Function to close modal
-    const closeModal = () => setIsModalOpen(false);
 
     // ------------------------------------------------------------------------------------
     const [selectedExpense, setSelectedExpense] = useState(null);
@@ -103,13 +96,9 @@ function ExpensesTable() {
 
             {isModalOpen && (
                 <UpdateForm
-                    // isOpen={isModalOpen}
-                    // closeModal={closeModal}
-                    // expenses={items}
                     isOpen={isModalOpen}
                     closeModal={() => setIsModalOpen(false)}
                     expenses={selectedExpense}
-                // updateExpensesList={updateExpensesList}
                 />
             )}
 
