@@ -51,7 +51,7 @@ function UpdateForm({ isOpen, closeModal, formData, setFormData }) {
                             <button
                                 type="submit"
                                 className="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 transition duration-300 ease-in-out">
-                                Submit
+                                Update
                             </button>
                             <button
                                 type="button"
