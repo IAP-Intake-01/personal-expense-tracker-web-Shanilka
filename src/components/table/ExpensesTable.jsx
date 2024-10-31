@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import UpdateForm from '../updateExpenses/UpdateForm';
 
-function ExpensesTable(props) {
+function ExpensesTable() {
 
     const items = [];
 
@@ -21,8 +21,6 @@ function ExpensesTable(props) {
                 } catch (err) {
                     console.error('Error fetching expenses:', err);
                     setError('Error fetching expenses');
-                } finally {
-                    setLoading(false);
                 }
             };
             fetchExpenses();
@@ -59,15 +57,6 @@ function ExpensesTable(props) {
 
     // Function to close modal
     const closeModal = () => setIsModalOpen(false);
-
-    // Load expenses data (example useEffect)
-    useEffect(() => {
-        const fetchExpenses = async () => {
-            const response = await axios.get('http://localhost:3000/api/getAllexpenses');
-            setExpenses(response.data);
-        };
-        fetchExpenses();
-    }, []);
 
     return (
         <div className="p-4  top-44 w-11/12 left-8 h-96 absolute">
@@ -109,8 +98,7 @@ function ExpensesTable(props) {
                 <UpdateForm
                     isOpen={isModalOpen}
                     closeModal={closeModal}
-                    formData={formData}
-                    setFormData={setFormData}
+                    expenses={items}
                 />
             )}
 
