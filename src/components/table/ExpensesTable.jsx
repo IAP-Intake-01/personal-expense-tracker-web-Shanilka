@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import UpdateForm from '../updateExpenses/UpdateForm';
 
-function ExpensesTable() {
+function ExpensesTable(props) {
 
     const items = [];
 
@@ -47,6 +48,27 @@ function ExpensesTable() {
         setPage(newPage);
     };
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({ id: "", category: "", price: "", date: "" });
+
+    // Function to open modal and set form data
+    const openModal = (item) => {
+        setFormData(item); // Populate form with existing data
+        setIsModalOpen(true);
+    };
+
+    // Function to close modal
+    const closeModal = () => setIsModalOpen(false);
+
+    // Load expenses data (example useEffect)
+    useEffect(() => {
+        const fetchExpenses = async () => {
+            const response = await axios.get('http://localhost:3000/api/getAllexpenses');
+            setExpenses(response.data);
+        };
+        fetchExpenses();
+    }, []);
+
     return (
         <div className="p-4  top-44 w-11/12 left-8 h-96 absolute">
             <div className="overflow-auto bg-white shadow-md rounded-lg h-80 left-1">
@@ -68,7 +90,7 @@ function ExpensesTable() {
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
                                 <td className="px-6 py-4 text-center whitespace-nowrap">
-                                    <button className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700 transition-colors">
+                                    <button onClick={() => openModal()} className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700 transition-colors">
                                         Update
                                     </button>
                                     <button
@@ -82,6 +104,15 @@ function ExpensesTable() {
                     </tbody>
                 </table>
             </div>
+
+            {isModalOpen && (
+                <UpdateForm
+                    isOpen={isModalOpen}
+                    closeModal={closeModal}
+                    formData={formData}
+                    setFormData={setFormData}
+                />
+            )}
 
             {/* Pagination */}
             <div className="flex items-center justify-between mt-4">
