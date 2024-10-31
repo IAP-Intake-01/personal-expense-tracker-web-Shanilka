@@ -58,6 +58,13 @@ function ExpensesTable() {
     // Function to close modal
     const closeModal = () => setIsModalOpen(false);
 
+    // ------------------------------------------------------------------------------------
+    const [selectedExpense, setSelectedExpense] = useState(null);
+    const handleRowClick = (item) => {
+        setSelectedExpense(item);
+        setIsModalOpen(true); // Open the modal
+    };
+
     return (
         <div className="p-4  top-44 w-11/12 left-8 h-96 absolute">
             <div className="overflow-auto bg-white shadow-md rounded-lg h-80 left-1">
@@ -73,7 +80,7 @@ function ExpensesTable() {
                     </thead>
                     <tbody>
                         {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
-                            <tr key={item.id} className="hover:bg-gray-50">
+                            <tr key={item.id} onClick={() => handleRowClick(item)} className="hover:bg-gray-50">
                                 <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
@@ -96,9 +103,13 @@ function ExpensesTable() {
 
             {isModalOpen && (
                 <UpdateForm
+                    // isOpen={isModalOpen}
+                    // closeModal={closeModal}
+                    // expenses={items}
                     isOpen={isModalOpen}
-                    closeModal={closeModal}
-                    expenses={items}
+                    closeModal={() => setIsModalOpen(false)}
+                    expenses={selectedExpense}
+                // updateExpensesList={updateExpensesList}
                 />
             )}
 
