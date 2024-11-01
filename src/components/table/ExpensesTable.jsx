@@ -74,7 +74,7 @@ function ExpensesTable() {
                     <tbody>
                         {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
                             <tr key={item.id} onClick={() => handleRowClick(item)} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
+                                {/* <td className="px-6 py-4 whitespace-nowrap">{item.id}</td> */}
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
