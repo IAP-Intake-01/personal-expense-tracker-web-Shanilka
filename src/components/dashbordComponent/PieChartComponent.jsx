@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 const data = [
     { name: 'Education', value: 400 },
     { name: 'Entertainment', value: 300 },
-    { name: 'Transport', value: 300 },
+    { name: 'Transport', value: 1300 },
     { name: 'Food', value: 200 },
     { name: 'Other', value: 100 },
 ];
@@ -13,15 +13,15 @@ const data = [
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
 
 const PieChartComponent = () => (
-    <div className="flex justify-center items-center p-4 bg-white shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold mb-4 text-center">Expense Distribution</h2>
+    <div className="flex justify-center items-center p-4 bg-white shadow-md rounded-lg w-80 left-2/3 absolute">
+        {/* <h2 className="text-xl font-semibold mb-4 text-center">Expense Distribution</h2> */}
         <PieChart width={300} height={300}>
             <Pie
                 data={data}
                 cx="50%"
                 cy="50%"
-                innerRadius={60}
-                outerRadius={100}
+                innerRadius={0}
+                outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
                 label
