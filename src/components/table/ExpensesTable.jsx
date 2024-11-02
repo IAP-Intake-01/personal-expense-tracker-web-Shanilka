@@ -26,6 +26,7 @@ function ExpensesTable() {
                 }
             };
             fetchExpenses();
+            console.log(expenses)
         }, []);
     }
     getall();
