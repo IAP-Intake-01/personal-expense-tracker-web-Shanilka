@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import axios from 'axios';
+import '../dashbordComponent/dashbordStyle/picechart.css'
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
 
@@ -20,7 +21,7 @@ const PieChartComponent = () => {
     }, []);
 
     return (
-        <div className="flex justify-center items-center p-4 bg-white shadow-md rounded-lg w-80 absolute left-2/3 top-2/4">
+        <div className="flex justify-center items-center p-4 bg-white shadow-md rounded-lg w-80 customPossition">
             <PieChart width={300} height={300}>
                 <Pie
                     data={chartData}
