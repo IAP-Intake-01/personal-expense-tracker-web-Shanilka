@@ -21,7 +21,7 @@ const PieChartComponent = () => {
     }, []);
 
     return (
-        <div className="flex justify-center items-center p-4 bg-white shadow-md rounded-lg w-80 customPossition">
+        <div className="flex justify-center items-center p-4 w-80 customPossition">
             <PieChart width={300} height={300}>
                 <Pie
                     data={chartData}

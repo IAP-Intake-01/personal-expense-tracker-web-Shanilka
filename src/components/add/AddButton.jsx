@@ -65,7 +65,7 @@ function AddButton() {
                                     <option value="Foods">Foods</option>
                                     <option value="education">Education</option>
                                     <option value="transport">Transport</option>
-                                    <option value="shoping">Shoping</option>
+                                    <option value="shoping">Shopping</option>
                                     <option value="other">Other</option>
                                     {/* Add more options as needed */}
                                 </select>

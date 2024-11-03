@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import axios from 'axios';
+import '../dashbordComponent/dashbordStyle/barchart.css'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -56,7 +57,7 @@ const BarChart = () => {
     };
 
     return (
-        <div className="absolute w-2/4">
+        <div className="possitionBarchart w-2/4">
             {chartData ? <Bar data={chartData} options={options} /> : <p>Loading...</p>}
         </div>
     );
