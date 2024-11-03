@@ -3,8 +3,10 @@ import RevenueCard from '../../components/dashbordComponent/RevenueCard'
 import ExpenseCard from '../../components/dashbordComponent/ExpenseCard'
 import Chart from '../../components/dashbordComponent/Chart'
 import PieChartComponent from '../../components/dashbordComponent/PieChartComponent'
-import BarChart from '../../components/dashbordComponent/BarChart'
 import Card from '../../components/dashbordComponent/Card'
+import CategoryCards from '../../components/dashbordComponent/catogorycard/CategoryCard'
+import BarChart from '../../components/dashbordComponent/barchartComponent/BarChart'
+import TotalExpensesCard from '../../components/dashbordComponent/totalexpensescard/TotalExpensesCard'
 
 function DashboardPage() {
 
@@ -33,6 +35,8 @@ function DashboardPage() {
                     ))}
                 </div>
             </div> */}
+            <CategoryCards />
+            <TotalExpensesCard />
             <PieChartComponent />
             <BarChart />
 
