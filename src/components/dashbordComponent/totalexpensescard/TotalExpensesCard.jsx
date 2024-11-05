@@ -33,9 +33,9 @@ const TotalExpensesCard = () => {
             className="bg-white rounded-xl shadow-lg p-6"
             style={{
                 position: 'absolute',
-                top: '120%',
+                top: '190%',
                 left: '3%',
-                height: '160%',
+                height: '260%',
                 width: '40%',
             }}
         >
