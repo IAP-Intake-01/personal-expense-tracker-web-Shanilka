@@ -19,6 +19,8 @@ function ExpensesTable() {
             }
         };
         fetchExpenses();
+        console.log(expenses);
+        console.log(selectedExpense);
     }, []);
 
     const handleDelete = async (id) => {
@@ -52,7 +54,7 @@ function ExpensesTable() {
                 <table className="min-w-full text-sm text-left text-gray-500">
                     <thead className="bg-gray-200 sticky top-0">
                         <tr>
-                            <th className="px-6 py-3 text-gray-700 font-semibold">Expensesn No</th>
+                            {/* <th className="px-6 py-3 text-gray-700 font-semibold">Expensesn No</th> */}
                             <th className="px-6 py-3 text-gray-700 font-semibold">Category</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Item Name</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Price</th>
@@ -63,14 +65,14 @@ function ExpensesTable() {
                     <tbody>
                         {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
                             <tr key={item.id} onClick={() => handleRowClick(item)} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
+                                {/* <td className="px-6 py-4 whitespace-nowrap">{item.id}</td> */}
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.itemname}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
                                 <td className="px-6 py-4 text-center whitespace-nowrap">
                                     <button
-                                        onClick={() => handleRowClick(item)}
+                                        onClick={() => handleRowClick(item.id)}
                                         className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700"
                                     >
                                         Update

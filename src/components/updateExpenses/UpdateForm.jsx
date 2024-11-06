@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateExpensesList prop
+function UpdateForm({ isOpen, closeModal, expense }) { // Receive the selected expense as a prop
 
-    const [id, setId] = useState(expenses.id);
+    const id = expense.id; // Handle undefined gracefully
     const [category, setCategory] = useState("");
     const [itemName, setItemname] = useState("");
     const [price, setPrice] = useState("");
     const [date, setDate] = useState("");
 
-
     const handleUpdate = async (event) => {
-        event.preventDefault(); // Prevent page refresh
-        console.log(id, category, price, date)
+        event.preventDefault();
+
+        // Check if all required fields are filled in
+        if (!id || !category || !price || !date || !itemName) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        console.log(id, category, price, date, itemName);
+
         try {
             const response = await axios.put('http://localhost:3000/api/updateExpenses', {
-                id: id, // Use the expense's id directly
+                id: id,
                 category: category,
-                itemName: itemName,
                 price: price,
                 date: date,
+                itemname: itemName,
             });
 
             console.log(response.data.message);
-
             closeModal(); // Close the modal after updating
         } catch (error) {
             console.error('Error updating expense:', error.response?.data?.error || error.message);
         }
-        // getall();
     };
+
 
     return (
         isOpen && (
@@ -51,7 +57,6 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
                                 <option value="Transport">Transport</option>
                                 <option value="Shopping">Shopping</option>
                                 <option value="Other">Other</option>
-                                {/* Add more options as needed */}
                             </select>
                         </label>
                         <label className="block mb-4">
@@ -59,18 +64,16 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
                             <input
                                 type="text"
                                 className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
-                                placeholder="Enter amount"
                                 required
                                 value={itemName}
                                 onChange={(e) => setItemname(e.target.value)}
                             />
                         </label>
                         <label className="block mb-4">
-                            <span className="text-gray-700">Amount</span>
+                            <span className="text-gray-700">Price</span>
                             <input
                                 type="number"
                                 className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
-                                placeholder="Enter amount"
                                 required
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
@@ -86,17 +89,19 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
                                 onChange={(e) => setDate(e.target.value)}
                             />
                         </label>
-                        <div className="flex justify-end">
-                            <button
-                                type="submit" // Keep this as submit to trigger the form submission
-                                className="mt-4 px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 transition duration-300 ease-in-out">
-                                Update
-                            </button>
+                        <div className="flex justify-end mt-4">
                             <button
                                 type="button"
                                 onClick={closeModal}
-                                className="mt-4 ml-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition duration-300 ease-in-out">
-                                Cancel
+                                className="bg-gray-500 text-white px-4 py-2 rounded-md mr-2"
+                            >
+                                Close
+                            </button>
+                            <button
+                                onClick={handleUpdate}
+                                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                            >
+                                Update
                             </button>
                         </div>
                     </form>
