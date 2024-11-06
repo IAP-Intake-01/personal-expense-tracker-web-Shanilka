@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../add/Button.css';
 import axios from 'axios';
+import AlertPopup from '../../common/alert/AlertPopup';
 
 function AddButton() {
     const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +10,7 @@ function AddButton() {
         category: '',
         price: '',
         date: '',
-        itemname: ''
+        itemname: '',
     });
 
     // ************************************ Save Data
@@ -28,6 +29,7 @@ function AddButton() {
         } catch (error) {
             console.error('Error during registration:', error);
             alert('Save failed: ' + (error.response?.data?.error || 'Unknown error'));
+
         }
         toggleModal();
         // window.location.reload();

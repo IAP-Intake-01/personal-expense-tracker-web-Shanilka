@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import UpdateForm from '../updateExpenses/UpdateForm';
-import '../table/table.css'
+import '../table/table.css';
 import { Delete, DeleteIcon } from 'lucide-react';
 import { GiArmBandage } from 'react-icons/gi';
 import { FcClearFilters } from 'react-icons/fc';
@@ -11,7 +11,7 @@ function ExpensesTable() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedExpense, setSelectedExpense] = useState(null);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     useEffect(() => {
         const fetchExpenses = async () => {
@@ -53,12 +53,11 @@ function ExpensesTable() {
     };
 
     return (
-        <div className="p-4  top-24 w-11/12 left-8 h-96 absolute">
-            <div className="overflow-auto bg-white shadow-md rounded-lg left-1 table">
+        <div className="p-4 w-11/12 h-96 absolute top-32 left-8">
+            <div className="overflow-auto bg-white shadow-md rounded-lg h-96">
                 <table className="min-w-full text-sm text-left text-gray-500">
                     <thead className="bg-gray-200 sticky top-0">
                         <tr>
-                            {/* <th className="px-6 py-3 text-gray-700 font-semibold">Expensesn No</th> */}
                             <th className="px-6 py-3 text-gray-700 font-semibold">Category</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Item Name</th>
                             <th className="px-6 py-3 text-gray-700 font-semibold">Price</th>
@@ -69,14 +68,13 @@ function ExpensesTable() {
                     <tbody>
                         {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
                             <tr key={item.id} className="hover:bg-gray-50">
-                                {/* <td className="px-6 py-4 whitespace-nowrap">{item.id}</td> */}
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.itemname}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.price}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.date}</td>
                                 <td className="px-6 py-4 text-center whitespace-nowrap">
                                     <button
-                                        onClick={() => handleRowClick(item.id)}
+                                        onClick={() => handleRowClick(item)}
                                         className="bg-teal-600 text-white px-3 py-1 rounded mr-2 hover:bg-teal-700"
                                     >
                                         Update
@@ -143,9 +141,3 @@ function ExpensesTable() {
 }
 
 export default ExpensesTable;
-
-
-// const date = new Date();
-// const formattedDate = date.toLocaleDateString();
-// console.log(formattedDate);
-// p-4  top-44 w-11/12 left-8 h-96 absolute

@@ -24,7 +24,7 @@ const CategoryCard = ({ icon: Icon, category, amount, bgColor }) => (
 
 const CategoryCards = () => {
     const [categories, setCategories] = useState([
-        { icon: Utensils, category: "Food", amount: 0, bgColor: "bg-blue-100" },
+        { icon: Utensils, category: "Foods", amount: 0, bgColor: "bg-blue-100" },
         { icon: GraduationCap, category: "Education", amount: 0, bgColor: "bg-orange-100" },
         { icon: Bus, category: "Transport", amount: 0, bgColor: "bg-green-100" },
         { icon: ShoppingCartIcon, category: "Shoping", amount: 0, bgColor: "bg-red-100" },
