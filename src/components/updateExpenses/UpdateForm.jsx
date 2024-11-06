@@ -5,23 +5,10 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
 
     const [id, setId] = useState(expenses.id);
     const [category, setCategory] = useState("");
+    const [itemName, setItemname] = useState("");
     const [price, setPrice] = useState("");
     const [date, setDate] = useState("");
 
-    // function getall() {
-    //     useEffect(() => {
-    //         const fetchExpenses = async () => {
-    //             try {
-    //                 const response = await axios.get('http://localhost:3000/api/getAllexpenses');
-    //                 setExpenses(response.data);
-    //             } catch (err) {
-    //                 console.error('Error fetching expenses:', err);
-    //                 setError('Error fetching expenses');
-    //             }
-    //         };
-    //         fetchExpenses();
-    //     }, []);
-    // }
 
     const handleUpdate = async (event) => {
         event.preventDefault(); // Prevent page refresh
@@ -30,6 +17,7 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
             const response = await axios.put('http://localhost:3000/api/updateExpenses', {
                 id: id, // Use the expense's id directly
                 category: category,
+                itemName: itemName,
                 price: price,
                 date: date,
             });
@@ -65,6 +53,17 @@ function UpdateForm({ isOpen, closeModal, expenses, loadAll }) { // Add updateEx
                                 <option value="Other">Other</option>
                                 {/* Add more options as needed */}
                             </select>
+                        </label>
+                        <label className="block mb-4">
+                            <span className="text-gray-700">Item name</span>
+                            <input
+                                type="text"
+                                className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
+                                placeholder="Enter amount"
+                                required
+                                value={itemName}
+                                onChange={(e) => setItemname(e.target.value)}
+                            />
                         </label>
                         <label className="block mb-4">
                             <span className="text-gray-700">Amount</span>

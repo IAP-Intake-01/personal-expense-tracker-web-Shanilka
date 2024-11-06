@@ -8,7 +8,8 @@ function AddButton() {
     const [formData, setFormData] = useState({
         category: '',
         price: '',
-        date: ''
+        date: '',
+        itemname: ''
     });
 
     // ************************************ Save Data
@@ -19,6 +20,7 @@ function AddButton() {
                 category: formData.category,
                 price: formData.price,
                 date: formData.date,
+                itemname: formData.itemname,
             });
             alert("Data Save successful: " + response.data.message);
             console.log(formData)
@@ -69,6 +71,16 @@ function AddButton() {
                                     <option value="other">Other</option>
                                     {/* Add more options as needed */}
                                 </select>
+                            </label>
+                            <label className="block mb-4">
+                                <span className="text-gray-700">Item Name</span>
+                                <input
+                                    type="text"
+                                    className="mt-1 block w-full h-12 border border-gray-300 rounded-md shadow-sm"
+                                    placeholder="Enter amount"
+                                    required
+                                    onChange={(val) => setFormData({ ...formData, itemname: val.target.value })}
+                                />
                             </label>
                             <label className="block mb-4">
                                 <span className="text-gray-700">Amount</span>
