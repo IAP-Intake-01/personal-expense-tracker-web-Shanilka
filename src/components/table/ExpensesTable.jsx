@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import UpdateForm from '../updateExpenses/UpdateForm';
+import '../table/table.css'
+import { Delete, DeleteIcon } from 'lucide-react';
+import { GiArmBandage } from 'react-icons/gi';
+import { FcClearFilters } from 'react-icons/fc';
 
 function ExpensesTable() {
     const [expenses, setExpenses] = useState([]);
@@ -49,8 +53,8 @@ function ExpensesTable() {
     };
 
     return (
-        <div className="p-4  top-44 w-11/12 left-8 h-96 absolute">
-            <div className="overflow-auto bg-white shadow-md rounded-lg h-96 left-1">
+        <div className="p-4  top-24 w-11/12 left-8 h-96 absolute">
+            <div className="overflow-auto bg-white shadow-md rounded-lg left-1 table">
                 <table className="min-w-full text-sm text-left text-gray-500">
                     <thead className="bg-gray-200 sticky top-0">
                         <tr>
@@ -64,7 +68,7 @@ function ExpensesTable() {
                     </thead>
                     <tbody>
                         {expenses.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
-                            <tr key={item.id} onClick={() => handleRowClick(item)} className="hover:bg-gray-50">
+                            <tr key={item.id} className="hover:bg-gray-50">
                                 {/* <td className="px-6 py-4 whitespace-nowrap">{item.id}</td> */}
                                 <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{item.itemname}</td>
