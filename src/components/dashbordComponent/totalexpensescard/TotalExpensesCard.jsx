@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../totalexpensescard/totalexpensesCard.css';
 
 const TotalExpensesCard = () => {
+    const [userEmail, setUserEmail] = useState("");
     const [data, setData] = useState({
         currentMonthTotal: 0,
         previousMonthTotal: 0,
@@ -11,22 +12,24 @@ const TotalExpensesCard = () => {
         growthPercentage: 0
     });
 
+    // Get the user email from localStorage
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                await axios.get('http://localhost:3000/api/expense-summary')
-                    .then(response => {
-                        setData(response.data);
-                    })
-                    .catch(error => {
-                        console.error("Error fetching expense summary:", error);
-                    });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData()
+        const email = localStorage.getItem('userEmail');
+        if (email) {
+            setUserEmail(email);
+            fetchData(email); // Fetch the data based on the email
+        }
     }, []);
+
+    // Function to fetch the expense data
+    const fetchData = async (email) => {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/expense-summary/${email}`);
+            setData(response.data);
+        } catch (error) {
+            console.error("Error fetching expense summary:", error);
+        }
+    };
 
     return (
         <div

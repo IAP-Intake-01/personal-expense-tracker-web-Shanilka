@@ -1,28 +1,32 @@
-import React, { useState } from 'react'
-import instance from '../../service/AxiosOrder';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        instance.post('/api/login', {
+        axios.post('http://localhost:3000/api/login', {
             email: email,
             password: password,
         })
             .then(function (response) {
-                console.log(response.data.token);
-                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userEmail', email)
                 window.location.reload()
+                console.log(response)
+                navigate('/dashboard')
             })
             .catch(function (error) {
                 console.log(error);
-            })
-    };
+            });
+    }
+
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
@@ -55,7 +59,8 @@ function LoginPage() {
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="you@example.com"
                                 required
-                                onChange={(val) => setEmail(val.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div>
@@ -65,7 +70,8 @@ function LoginPage() {
                                 className="w-full px-4 py-3 mt-1 text-gray-900 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-200"
                                 placeholder="Your password"
                                 required
-                                onChange={(val) => setPassword(val.target.value)}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <button
@@ -78,7 +84,7 @@ function LoginPage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default LoginPage
+export default LoginPage;

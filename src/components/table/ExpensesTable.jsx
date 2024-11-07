@@ -2,9 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import UpdateForm from '../updateExpenses/UpdateForm';
 import '../table/table.css';
-import { Delete, DeleteIcon } from 'lucide-react';
-import { GiArmBandage } from 'react-icons/gi';
-import { FcClearFilters } from 'react-icons/fc';
 
 function ExpensesTable() {
     const [expenses, setExpenses] = useState([]);
@@ -12,20 +9,37 @@ function ExpensesTable() {
     const [selectedExpense, setSelectedExpense] = useState(null);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [userEmail, setuserEmail] = useState("");
+
+    // useEffect(() => {
+    //     console.log(localStorage.getItem);
+    //     let email = '';
+    //     if (email = localStorage.getItem('userEmail')) {
+    //         setuserEmail(email)
+    //     }
+    // }, [])
 
     useEffect(() => {
         const fetchExpenses = async () => {
+            console.log(userEmail)
             try {
-                const response = await axios.get('http://localhost:3000/api/getAllexpenses');
+                // Retrieve userEmail from localStorage
+                const userEmail = localStorage.getItem('userEmail');
+                if (!userEmail) {
+                    console.error('User email not found in localStorage');
+                    return;
+                }
+
+                // Make a GET request with userEmail as a parameter
+                const response = await axios.get(`http://localhost:3000/api/getExpensesByUser/${userEmail}`);
                 setExpenses(response.data);
             } catch (err) {
                 console.error('Error fetching expenses:', err);
             }
         };
         fetchExpenses();
-        console.log(expenses);
-        console.log(selectedExpense);
     }, []);
+
 
     const handleDelete = async (id) => {
         try {

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../add/Button.css';
 import axios from 'axios';
 import AlertPopup from '../../common/alert/AlertPopup';
 
 function AddButton() {
     const [isVisible, setIsVisible] = useState(false);
-
+    const [userEmail, setuserEmail] = useState("");
     const [formData, setFormData] = useState({
         category: '',
         price: '',
@@ -13,18 +13,30 @@ function AddButton() {
         itemname: '',
     });
 
+    useEffect(() => {
+        console.log(localStorage.getItem);
+        let email = '';
+        if (email = localStorage.getItem('userEmail')) {
+            setuserEmail(email)
+        }
+    }, [])
+
     // ************************************ Save Data
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // const storedEmail = localStorage.getItem('userEmail');
+        // console.log('Stored email:', storedEmail);
+
         try {
             const response = await axios.post('http://localhost:3000/api/saveData', {
                 category: formData.category,
                 price: formData.price,
                 date: formData.date,
                 itemname: formData.itemname,
+                userEmail: userEmail,
             });
             alert("Data Save successful: " + response.data.message);
-            console.log(formData)
             // navigate('/login')
         } catch (error) {
             console.error('Error during registration:', error);
