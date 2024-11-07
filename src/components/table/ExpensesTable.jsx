@@ -11,14 +11,6 @@ function ExpensesTable() {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [userEmail, setuserEmail] = useState("");
 
-    // useEffect(() => {
-    //     console.log(localStorage.getItem);
-    //     let email = '';
-    //     if (email = localStorage.getItem('userEmail')) {
-    //         setuserEmail(email)
-    //     }
-    // }, [])
-
     useEffect(() => {
         const fetchExpenses = async () => {
             console.log(userEmail)

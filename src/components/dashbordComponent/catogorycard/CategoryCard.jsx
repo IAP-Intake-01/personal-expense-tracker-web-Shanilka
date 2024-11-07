@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import axios from 'axios';
 import {
     Utensils,
@@ -27,18 +27,25 @@ const CategoryCards = memo(() => {
         { icon: Utensils, category: "Foods", amount: 0, bgColor: "bg-blue-100" },
         { icon: GraduationCap, category: "Education", amount: 0, bgColor: "bg-orange-100" },
         { icon: Bus, category: "Transport", amount: 0, bgColor: "bg-green-100" },
-        { icon: ShoppingCartIcon, category: "Shoping", amount: 0, bgColor: "bg-red-100" },
+        { icon: ShoppingCartIcon, category: "Shopping", amount: 0, bgColor: "bg-red-100" },
         { icon: MoreHorizontal, category: "Other", amount: 0, bgColor: "bg-purple-100" }
     ]);
     const [fetched, setFetched] = useState(false); // Add a fetched state
 
     useEffect(() => {
+        // Get userEmail from localStorage
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            console.error('No user email found in localStorage');
+            return;
+        }
+
         // Check if data is already fetched to avoid double fetching
         if (fetched) return;
 
-        const fetchData = async () => {
+        const fetchData = async (email) => {
             try {
-                const response = await axios.get('http://localhost:3000/api/getCatogoryTotal');
+                const response = await axios.get(`http://localhost:3000/api/getCatogoryTotal/${email}`);
                 const data = response.data;
                 setCategories(prevCategories =>
                     prevCategories.map(category => {
@@ -51,7 +58,9 @@ const CategoryCards = memo(() => {
                 console.error('Error fetching category totals:', error);
             }
         };
-        fetchData();
+
+        fetchData(userEmail); // Pass the userEmail to the API
+
     }, [fetched]); // Include `fetched` dependency to prevent multiple fetches
 
     return (

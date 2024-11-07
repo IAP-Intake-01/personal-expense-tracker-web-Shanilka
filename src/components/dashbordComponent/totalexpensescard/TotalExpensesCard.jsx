@@ -16,7 +16,7 @@ const TotalExpensesCard = () => {
     useEffect(() => {
         const email = localStorage.getItem('userEmail');
         if (email) {
-            setUserEmail(email);
+            // setUserEmail(email);
             fetchData(email); // Fetch the data based on the email
         }
     }, []);
