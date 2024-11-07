@@ -27,7 +27,7 @@ const CategoryCards = memo(() => {
         { icon: Utensils, category: "Foods", amount: 0, bgColor: "bg-blue-100" },
         { icon: GraduationCap, category: "Education", amount: 0, bgColor: "bg-orange-100" },
         { icon: Bus, category: "Transport", amount: 0, bgColor: "bg-green-100" },
-        { icon: ShoppingCartIcon, category: "Shopping", amount: 0, bgColor: "bg-red-100" },
+        { icon: ShoppingCartIcon, category: "shoping", amount: 0, bgColor: "bg-red-100" },
         { icon: MoreHorizontal, category: "Other", amount: 0, bgColor: "bg-purple-100" }
     ]);
     const [fetched, setFetched] = useState(false); // Add a fetched state
