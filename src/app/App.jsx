@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import LoginPage from './pages/loginPage/LoginPage';
-import RegisterPage from './pages/registerPage/RegisterPage';
-import './index.css';  // Import Tailwind here
-import SideBar from "./common/sideBar/SideBar.jsx";
-import DashboardPage from "./pages/dashboardPage/DashboardPage.jsx";
-import ExpensesPage from "./pages/expensesPage/ExpensesPage.jsx";
+import LoginPage from '../pages/loginPage/LoginPage.jsx';
+import RegisterPage from '../pages/registerPage/RegisterPage.jsx';
+import '../index.css';  // Import Tailwind here
+import SideBar from "../common/sideBar/SideBar.jsx";
+import DashboardPage from "../pages/dashboardPage/DashboardPage.jsx";
+import ExpensesPage from "../pages/expensesPage/ExpensesPage.jsx";
 import { useEffect, useState } from "react";
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import axios from 'axios';
-import '../barchartComponent/barchart.css'
+import '../barchartComponent/barchart.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -12,7 +12,19 @@ const BarChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/getLastMonthData');
+                // Get userEmail from localStorage
+                const userEmail = localStorage.getItem('userEmail');
+
+                if (!userEmail) {
+                    console.error('No user email found in localStorage');
+                    return;
+                }
+
+                // Pass userEmail as a query parameter
+                const response = await axios.get(`http://localhost:3000/api/getLast7DaysData/${userEmail}`, {
+                    params: { userEmail },
+                });
+
                 const data = response.data;
 
                 // Extract categories and totals
@@ -23,7 +35,7 @@ const BarChart = () => {
                     labels,
                     datasets: [
                         {
-                            label: 'Total Expenses',
+                            label: 'Total Expenses (Last 7 Days)',
                             data: totals,
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.5)',
@@ -51,7 +63,7 @@ const BarChart = () => {
             },
             title: {
                 display: true,
-                text: 'Category-wise Expense Summary for Last Month',
+                text: 'Category-wise Expense Summary for Last 7 Days',
             },
         },
     };
