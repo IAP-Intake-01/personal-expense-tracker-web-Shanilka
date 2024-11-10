@@ -11,24 +11,26 @@ const PieChartComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Get userEmail from localStorage
+
                 const userEmail = localStorage.getItem('userEmail');
                 if (!userEmail) {
                     console.error('No user email found in localStorage');
                     return;
                 }
 
-                // Fetch data from the backend with userEmail as a query parameter
-                const response = await axios.get(`http://localhost:3000/api/getCatagorySum/${userEmail}`);
+                const response = await axios.get(`http://localhost:3000/api/getCategorySum/${userEmail}`);
+                console.log('Response data:', response.data); // Debugging log
 
-                // Normalize the data to make the total value sum up to 100%
                 const totalSum = response.data.reduce((sum, item) => sum + item.value, 0);
+
                 const normalizedData = response.data.map(item => ({
                     ...item,
-                    value: totalSum ? ((item.value / totalSum) * 100).toFixed(2) : 0 // Convert to percentage
+                    value: totalSum ? Math.round((item.value / totalSum) * 100) : 0 // Convert each value to an integer percentage
                 }));
 
                 setChartData(normalizedData);
+                console.log(normalizedData);
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -38,25 +40,29 @@ const PieChartComponent = () => {
 
     return (
         <div className="flex justify-center items-center p-4 w-80 customPossition">
-            <PieChart width={300} height={300}>
-                <Pie
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={0}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                    nameKey="name"
-                    label={({ name, value }) => `${name}: ${value}%`} // Display category name and percentage
-                >
-                    {chartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
+            {chartData.length > 0 ? (
+                <PieChart width={300} height={300}>
+                    <Pie
+                        data={chartData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                        nameKey="category" 
+                        label={({ category, value }) => `${value}%`}
+                    >
+                        {chartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                    </Pie>
+                    <Tooltip />
+                    <Legend />
+                </PieChart>
+            ) : (
+                <p>No data available</p>
+            )}
         </div>
     );
 };
