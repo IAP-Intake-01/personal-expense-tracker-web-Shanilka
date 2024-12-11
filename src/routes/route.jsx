@@ -1,3 +1,4 @@
+import React from 'react';
 import DashboardPage from "../pages/dashboardPage/DashboardPage";
 import ExpensesPage from "../pages/expensesPage/ExpensesPage";
 
